@@ -26,6 +26,8 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult Get()  //Burası List<Product>'tı biz IActionResult'a çevirdik. IActionResult ile HTTP Statu Code olan 200 OK gibi 400 BadRequest() gibi durum kodlarını vereceği<.
         {
+            Thread.Sleep(3000);
+
             var result = _productService.GetAll();
             if (result.Success)
             {

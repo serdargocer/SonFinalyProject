@@ -19,5 +19,6 @@ namespace Business.Abstract
         IResult Add(Product product); //ProductService'te herhangi bir implemente işlemi gerçekleştirmediğimiz için IEntityRepository içerisindeki jeneric ifadeceleri kullanamıyoruz. Onun için burada Add metodunu tekrar yazmak zorunda kalıyoruz.
         IResult Update(Product product);
         IResult Delete(Product product);
+        IResult TransactionalOperation(Product product);
     }
 }

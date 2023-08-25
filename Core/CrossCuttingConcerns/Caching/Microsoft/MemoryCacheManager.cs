@@ -60,6 +60,42 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
             {
                 _cache.Remove(key);
             }
+
+
+
+
+
+            //var cacheEntriesCollectionDefinition = typeof(MemoryCache).GetProperty("EntriesCollection", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+            //if (cacheEntriesCollectionDefinition != null)
+            //{
+
+            //    var cacheEntriesCollection = cacheEntriesCollectionDefinition.GetValue(_cache) as dynamic;
+
+            //    if (cacheEntriesCollection != null)
+            //    {
+            //        // Define a new list we'll be adding the cache entries too
+            //        List<ICacheEntry> cacheCollectionValues = new List<ICacheEntry>();
+
+            //        foreach (var cacheItem in cacheEntriesCollection)
+            //        {
+            //            // Get the "Value" from the key/value pair which contains the cache entry   
+            //            ICacheEntry cacheItemValue = cacheItem.GetType().GetProperty("Value").GetValue(cacheItem, null);
+
+            //            // Add the cache entry to the list
+            //            cacheCollectionValues.Add(cacheItemValue);
+            //        }
+
+
+            //        var regex = new Regex(pattern, RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            //        var keysToRemove = cacheCollectionValues.Where(d => regex.IsMatch(d.Key.ToString())).Select(d => d.Key).ToList();
+
+            //        foreach (var key in keysToRemove)
+            //        {
+            //            _cache.Remove(key);
+            //        }
+
+
         }
     }
 }

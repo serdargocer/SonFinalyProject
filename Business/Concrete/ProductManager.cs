@@ -4,6 +4,8 @@ using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.Entities.DTOs;
 using Core.Utilities.Business;
@@ -53,12 +55,10 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<List<Product>> GetAll()
         {
-            //if (DateTime.Now.Hour == 21)
-            //{
-            //    return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
-            //}
+            Thread.Sleep(5000);
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(), Messages.ProductListed); //(_productDal.GetAll()) ile döndürdüğüm DATA'yı ben List<Product> veri tipi ile çağıracağım yani bir aray listesi olarak çağıracağım diyoruz.
         }
 
@@ -124,6 +124,14 @@ namespace Business.Concrete
         {
             _productDal.Delete(product);
             return new SuccessResult(Messages.ProductDeleted);
+        }
+
+        [TransactionScopeAspect]
+        public IResult TransactionalOperation(Product product)
+        {
+            _productDal.Update(product);
+            _productDal.Add(product);
+            return new SuccessResult(Messages.ProductUpdated);
         }
     }
 }
